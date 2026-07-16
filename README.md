@@ -373,9 +373,25 @@ If you would like to improve the project, feel free to open issues or submit pul
 
 ---
 
-# Acknowledgements
+## Acknowledgements
 
-AuraFit-AI builds on ideas from published research in image-based virtual try-on. If you use the original datasets, pretrained checkpoints, or reproduce published methods, please follow the licensing, attribution, and citation requirements provided by the respective authors.
+AuraFit-AI incorporates techniques inspired by the published **HR-VITON** research project.
+
+The original research was introduced in:
+
+**High-Resolution Virtual Try-On with Misalignment and Occlusion-Handled Conditions**
+
+Sangyun Lee, Gyojung Gu, Sunghyun Park, Seunghwan Choi, Jaegul Choo
+
+ECCV 2022
+
+Paper:
+https://arxiv.org/abs/2206.14180
+
+Official Project:
+https://github.com/sangyun884/HR-VITON
+
+The original datasets, pretrained checkpoints, and research methods remain the work of their respective authors. If you use those resources, please follow the licensing and citation requirements provided by the original project.
 
 ---
 
