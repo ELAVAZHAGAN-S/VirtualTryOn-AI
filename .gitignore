@@ -1,0 +1,7 @@
+assets/
+checkpoints/
+__pycache__/
+*.pyc
+outputs/
+logs/
+runs/

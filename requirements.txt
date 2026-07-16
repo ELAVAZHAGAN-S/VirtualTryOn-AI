@@ -1,0 +1,63 @@
+# requirements.txt — HR-VITON (refactored) Python dependencies.
+#
+# This file reproduces, as pip-installable requirements, the exact
+# dependency list given in the original project's README.md
+# "Installation" section:
+#
+#     conda create -n {env_name} python=3.8
+#     conda activate {env_name}
+#     conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch-lts -c nvidia
+#     pip install opencv-python torchgeometry Pillow tqdm tensorboardX scikit-image scipy
+#
+# i.e. Python 3.8, PyTorch/torchvision/torchaudio (originally installed
+# via conda against CUDA 11.1; use the appropriate PyTorch wheel/index
+# for your own CUDA version when installing via pip -- see
+# https://pytorch.org/get-started/previous-versions/ for the pip
+# equivalent of "cudatoolkit=11.1"), plus opencv-python, torchgeometry,
+# Pillow, tqdm, tensorboardX, scikit-image, and scipy.
+#
+# Two additions beyond the original README's exact list, both required
+# for the codebase (as originally written) to actually run rather than
+# raise an ImportError, and neither optional:
+#
+#   - numpy: used directly throughout the codebase (cp_dataset.py,
+#     utils.py, networks.py, network_generator.py, etc.); the original
+#     README never listed it explicitly because it is pulled in
+#     transitively by the conda-installed PyTorch/torchvision/OpenCV
+#     packages, but it must be declared explicitly here since this file
+#     is a pip requirements list, not a conda environment export.
+#   - ipython: required because vendor/lpips/base_model.py and
+#     vendor/lpips/dist_model.py (relocated verbatim from the original
+#     eval_models/base_model.py and eval_models/dist_model.py -- see
+#     vendor/README.md) each contain a top-level `from IPython import
+#     embed` debug import. This import executes unconditionally at
+#     module-import time (not only when the debug hook is actually
+#     invoked), so importing vendor.lpips -- and therefore running
+#     evaluate.py or train_generator.py's periodic LPIPS validation --
+#     fails with ModuleNotFoundError without ipython installed. This
+#     was true of the original eval_models/ code as shipped and is not
+#     a change introduced by this refactor; it is called out here only
+#     because requirements.txt did not exist in the original project
+#     for this gap to be visible in.
+#
+# apex (NVIDIA's mixed-precision training library, used only inside the
+# opt.fp16 branches of hrviton/training/generator_engine.py, i.e. only
+# when --fp16 is passed on the command line) is intentionally NOT
+# listed below: the "apex" package on PyPI is an unrelated third-party
+# package, not NVIDIA's library, so `pip install apex` would install
+# the wrong thing. NVIDIA's apex must be built from source; see
+# https://github.com/NVIDIA/apex for installation instructions if you
+# need --fp16 support.
+
+torch
+torchvision
+torchaudio
+numpy
+opencv-python
+torchgeometry
+Pillow
+tqdm
+tensorboardX
+scikit-image
+scipy
+ipython
