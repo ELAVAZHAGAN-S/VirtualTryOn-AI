@@ -1,7 +1,10 @@
 assets/
 checkpoints/
-__pycache__/
-*.pyc
 outputs/
 logs/
 runs/
+__pycache__/
+*.pyc
+*.pyo
+*.pth
+.ipynb_checkpoints/
